@@ -1,0 +1,31 @@
+.center {
+    text-align: center;
+}
+
+#pfp {
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    scale: 75%;
+}
+
+body {
+    background-color: #b8f5ee;
+}
+
+.listmenu {
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    list-style-position: inside;
+    font-size: x-large;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.listmenu:hover {
+    background-color: antiquewhite;
+}
