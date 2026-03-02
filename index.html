@@ -1,639 +1,568 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Made With AI For Fast Development -->
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Daniel | Portfolio</title>
-        <!-- Victor Mono Font -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Victor+Mono:ital,wght@0,100..700;1,100..700&display=swap"
-            rel="stylesheet"
-        />
-        <!-- FontAwesome for Icons -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        />
-
-        <style>
-            /* ==========================================================================
+<head>
+    <!-- Made With AI For Fast Development -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel | Portfolio</title>
+    <!-- Victor Mono Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Victor+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
            1. CSS VARIABLES (THEME: COZY SUNSET BEACH + MATERIAL YOU)
            ========================================================================== */
-            :root {
-                /* Backgrounds */
-                --bg-base: #1a1320; /* Deep dusk purple */
-                --bg-card: #2d1e30; /* Lighter twilight purple */
-                --bg-menu: rgba(26, 19, 32, 0.95);
+        :root {
+            /* Backgrounds */
+            --bg-base: #1A1320;       /* Deep dusk purple */
+            --bg-card: #2D1E30;       /* Lighter twilight purple */
+            --bg-menu: rgba(26, 19, 32, 0.95);
+            
+            /* Accents (Sunset Colors) */
+            --accent-coral: #FF7E67;  /* Sunset orange/coral */
+            --accent-peach: #FFB49A;  /* Soft peach */
+            --accent-magenta: #D9598C;/* Dusk magenta */
+            --accent-yellow: #FFD166; /* Setting sun */
+            
+            /* Text */
+            --text-main: #FDE4D0;     /* Very soft peach/white */
+            --text-muted: #B89BB2;    /* Muted dusk */
+            
+            /* Material You settings */
+            --border-width: 4px;
+            --radius-sm: 16px;
+            --radius-md: 32px;
+            --radius-lg: 48px;
+            --radius-full: 9999px;
+            
+            /* Hyprland Bezier */
+            --hypr-curve: cubic-bezier(0.05, 0.9, 0.1, 1.03);
+            --transition-speed: 0.8s;
+        }
 
-                /* Accents (Sunset Colors) */
-                --accent-coral: #ff7e67; /* Sunset orange/coral */
-                --accent-peach: #ffb49a; /* Soft peach */
-                --accent-magenta: #d9598c; /* Dusk magenta */
-                --accent-yellow: #ffd166; /* Setting sun */
-
-                /* Text */
-                --text-main: #fde4d0; /* Very soft peach/white */
-                --text-muted: #b89bb2; /* Muted dusk */
-
-                /* Material You settings */
-                --border-width: 4px;
-                --radius-sm: 16px;
-                --radius-md: 32px;
-                --radius-lg: 48px;
-                --radius-full: 9999px;
-
-                /* Hyprland Bezier */
-                --hypr-curve: cubic-bezier(0.05, 0.9, 0.1, 1.03);
-                --transition-speed: 0.8s;
-            }
-
-            /* ==========================================================================
+        /* ==========================================================================
            2. GLOBAL STYLES
            ========================================================================== */
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                font-family: "Victor Mono", monospace;
-            }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Victor Mono', monospace;
+        }
 
-            body {
-                background-color: var(--bg-base);
-                color: var(--text-main);
-                overflow: hidden; /* We handle scrolling via JS workspaces */
-                height: 100vh;
-                width: 100vw;
-                position: relative;
-            }
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            overflow: hidden; /* We handle scrolling via JS workspaces */
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
 
-            a {
-                color: inherit;
-                text-decoration: none;
-            }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-            /* ==========================================================================
+        /* ==========================================================================
            3. PARALLAX BACKGROUND SHAPES
            ========================================================================== */
-            .bg-canvas {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                z-index: 0;
-                pointer-events: none;
-                overflow: hidden;
-            }
+        .bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
 
-            .bg-shape {
-                position: absolute;
-                border-radius: 50%;
-                filter: blur(80px);
-                opacity: 0.5;
-                transition: transform 0.2s ease-out;
-            }
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            transition: transform 0.2s ease-out;
+        }
 
-            .shape-1 {
-                width: 600px;
-                height: 600px;
-                background: radial-gradient(
-                    circle,
-                    var(--accent-magenta),
-                    transparent 70%
-                );
-                top: -10%;
-                left: -10%;
-            }
+        .shape-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-magenta), transparent 70%);
+            top: -10%;
+            left: -10%;
+        }
 
-            .shape-2 {
-                width: 800px;
-                height: 800px;
-                background: radial-gradient(
-                    circle,
-                    var(--accent-coral),
-                    transparent 70%
-                );
-                bottom: -20%;
-                right: -10%;
-            }
+        .shape-2 {
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-coral), transparent 70%);
+            bottom: -20%;
+            right: -10%;
+        }
 
-            .shape-3 {
-                width: 500px;
-                height: 500px;
-                background: radial-gradient(
-                    circle,
-                    var(--accent-yellow),
-                    transparent 70%
-                );
-                top: 40%;
-                left: 40%;
-                opacity: 0.3;
-            }
+        .shape-3 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-yellow), transparent 70%);
+            top: 40%;
+            left: 40%;
+            opacity: 0.3;
+        }
 
-            /* ==========================================================================
+        /* ==========================================================================
            4. WORKSPACE ENGINE (HYPRLAND STYLE)
            ========================================================================== */
-            .workspace-container {
-                display: flex;
-                width: 100vw;
-                height: 100vh;
-                position: relative;
-                z-index: 10;
-                transition: transform var(--transition-speed) var(--hypr-curve);
-                will-change: transform;
-            }
+        .workspace-container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            z-index: 10;
+            transition: transform var(--transition-speed) var(--hypr-curve);
+            will-change: transform;
+        }
 
-            .workspace {
-                min-width: 100vw;
-                height: 100vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 2rem;
-                position: relative;
-            }
+        .workspace {
+            min-width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
 
-            .workspace-indicators {
-                position: fixed;
-                bottom: 2rem;
-                left: 50%;
-                transform: translateX(-50%);
-                display: flex;
-                gap: 1rem;
-                z-index: 50;
-            }
+        .workspace-indicators {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 50;
+        }
 
-            .dot {
-                width: 12px;
-                height: 12px;
-                border-radius: 50%;
-                background-color: var(--bg-card);
-                border: 2px solid var(--text-muted);
-                transition: all 0.3s var(--hypr-curve);
-                cursor: pointer;
-            }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--bg-card);
+            border: 2px solid var(--text-muted);
+            transition: all 0.3s var(--hypr-curve);
+            cursor: pointer;
+        }
 
-            .dot.active {
-                background-color: var(--accent-coral);
-                border-color: var(--accent-coral);
-                width: 32px;
-                border-radius: 12px;
-            }
+        .dot.active {
+            background-color: var(--accent-coral);
+            border-color: var(--accent-coral);
+            width: 32px;
+            border-radius: 12px;
+        }
 
-            /* ==========================================================================
+        /* ==========================================================================
            5. MATERIAL YOU CARDS & COMPONENTS
            ========================================================================== */
-            .container {
-                max-width: 1200px;
-                width: 100%;
-                display: flex;
-                gap: 2rem;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: stretch;
-            }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+        }
 
-            .card {
-                background-color: var(--bg-card);
-                border-radius: var(--radius-md);
-                padding: 2rem;
-                position: relative;
-                transition:
-                    transform 0.3s var(--hypr-curve),
-                    box-shadow 0.3s ease;
-            }
+        .card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            position: relative;
+            transition: transform 0.3s var(--hypr-curve), box-shadow 0.3s ease;
+        }
 
-            .card:hover {
-                transform: translateY(-5px);
-            }
+        .card:hover {
+            transform: translateY(-5px);
+        }
 
-            /* Bold Color-Matching Borders */
-            .border-coral {
-                border: var(--border-width) solid var(--accent-coral);
-                box-shadow: 6px 6px 0px rgba(255, 126, 103, 0.2);
-            }
-            .border-magenta {
-                border: var(--border-width) solid var(--accent-magenta);
-                box-shadow: 6px 6px 0px rgba(217, 89, 140, 0.2);
-            }
-            .border-yellow {
-                border: var(--border-width) solid var(--accent-yellow);
-                box-shadow: 6px 6px 0px rgba(255, 209, 102, 0.2);
-            }
-            .border-peach {
-                border: var(--border-width) solid var(--accent-peach);
-                box-shadow: 6px 6px 0px rgba(255, 180, 154, 0.2);
-            }
+        /* Bold Color-Matching Borders */
+        .border-coral { 
+            border: var(--border-width) solid var(--accent-coral); 
+            box-shadow: 6px 6px 0px rgba(255, 126, 103, 0.2);
+        }
+        .border-magenta { 
+            border: var(--border-width) solid var(--accent-magenta); 
+            box-shadow: 6px 6px 0px rgba(217, 89, 140, 0.2);
+        }
+        .border-yellow { 
+            border: var(--border-width) solid var(--accent-yellow); 
+            box-shadow: 6px 6px 0px rgba(255, 209, 102, 0.2);
+        }
+        .border-peach { 
+            border: var(--border-width) solid var(--accent-peach); 
+            box-shadow: 6px 6px 0px rgba(255, 180, 154, 0.2);
+        }
 
-            /* ==========================================================================
+        /* ==========================================================================
            6. SPECIFIC SECTIONS
            ========================================================================== */
+        
+        /* Profile & Intro */
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: var(--radius-lg);
+            border: var(--border-width) solid var(--accent-coral);
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+        }
 
-            /* Profile & Intro */
-            .profile-pic {
-                width: 150px;
-                height: 150px;
-                border-radius: var(--radius-lg);
-                border: var(--border-width) solid var(--accent-coral);
-                object-fit: cover;
-                margin-bottom: 1.5rem;
-            }
+        .intro-card {
+            text-align: center;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-            .intro-card {
-                text-align: center;
-                max-width: 600px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
+        .title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent-coral);
+            min-height: 4rem; /* Prevents layout shift during animation */
+        }
 
-            .title {
-                font-size: 3rem;
-                font-weight: 700;
-                margin-bottom: 1rem;
-                color: var(--accent-coral);
-                min-height: 4rem; /* Prevents layout shift during animation */
-            }
+        .subtitle {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            font-style: italic;
+        }
 
-            .subtitle {
-                font-size: 1.1rem;
-                line-height: 1.6;
-                color: var(--text-main);
-                font-style: italic;
-            }
+        /* Materialize Text Animation */
+        .char {
+            display: inline-block;
+            opacity: 0;
+            filter: blur(4px);
+            transform: scale(0.8) translateY(10px);
+            animation: materialize 0.4s var(--hypr-curve) forwards;
+        }
 
-            /* Materialize Text Animation */
-            .char {
-                display: inline-block;
-                opacity: 0;
-                filter: blur(4px);
-                transform: scale(0.8) translateY(10px);
-                animation: materialize 0.4s var(--hypr-curve) forwards;
+        @keyframes materialize {
+            to {
+                opacity: 1;
+                filter: blur(0);
+                transform: scale(1) translateY(0);
             }
+        }
 
-            @keyframes materialize {
-                to {
-                    opacity: 1;
-                    filter: blur(0);
-                    transform: scale(1) translateY(0);
-                }
-            }
+        /* Info Grid (Workspace 2) */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
 
-            /* Info Grid (Workspace 2) */
-            .info-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 1.5rem;
-                width: 100%;
-            }
+        .info-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 200px;
+        }
 
-            .info-card {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-                min-height: 200px;
-            }
+        .info-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
 
-            .info-icon {
-                font-size: 2.5rem;
-                margin-bottom: 1rem;
-            }
+        .clock-display {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
 
-            .clock-display {
-                font-size: 2rem;
-                font-weight: 700;
-                margin-top: 0.5rem;
-            }
+        .map-icon {
+            width: 50px;
+            height: 50px;
+            fill: var(--accent-yellow);
+            margin-bottom: 1rem;
+        }
 
-            .map-icon {
-                width: 50px;
-                height: 50px;
-                fill: var(--accent-yellow);
-                margin-bottom: 1rem;
-            }
+        /* Endless Gallery (Workspace 3) */
+        .gallery-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            overflow: hidden;
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            padding: 2rem 0;
+            position: relative;
+        }
 
-            /* Endless Gallery (Workspace 3) */
-            .gallery-wrapper {
-                width: 100%;
-                max-width: 1000px;
-                overflow: hidden;
-                border-radius: var(--radius-md);
-                background: var(--bg-card);
-                padding: 2rem 0;
-                position: relative;
-            }
+        /* Fade edges */
+        .gallery-wrapper::before,
+        .gallery-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+        }
+        .gallery-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-card), transparent);
+        }
+        .gallery-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-card), transparent);
+        }
 
-            /* Fade edges */
-            .gallery-wrapper::before,
-            .gallery-wrapper::after {
-                content: "";
-                position: absolute;
-                top: 0;
-                width: 100px;
-                height: 100%;
-                z-index: 2;
-            }
-            .gallery-wrapper::before {
-                left: 0;
-                background: linear-gradient(
-                    to right,
-                    var(--bg-card),
-                    transparent
-                );
-            }
-            .gallery-wrapper::after {
-                right: 0;
-                background: linear-gradient(
-                    to left,
-                    var(--bg-card),
-                    transparent
-                );
-            }
+        .marquee {
+            display: flex;
+            gap: 2rem;
+            width: max-content;
+            animation: scroll-left 30s linear infinite;
+        }
 
-            .marquee {
-                display: flex;
-                gap: 2rem;
-                width: max-content;
-                animation: scroll-left 30s linear infinite;
-            }
+        .marquee:hover {
+            animation-play-state: paused;
+        }
 
-            .marquee:hover {
-                animation-play-state: paused;
-            }
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 1rem)); } /* -50% because we duplicate content */
+        }
 
-            @keyframes scroll-left {
-                0% {
-                    transform: translateX(0);
-                }
-                100% {
-                    transform: translateX(calc(-50% - 1rem));
-                } /* -50% because we duplicate content */
-            }
+        .gallery-item {
+            width: 250px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
 
-            .gallery-item {
-                width: 250px;
-                flex-shrink: 0;
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-            }
+        .gallery-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--accent-magenta);
+        }
+        
+        .gallery-desc {
+            font-size: 0.9rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
 
-            .gallery-img {
-                width: 100%;
-                height: 180px;
-                object-fit: cover;
-                border-radius: var(--radius-sm);
-                border: 2px solid var(--accent-magenta);
-            }
+        /* Socials */
+        .social-flex {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
 
-            .gallery-desc {
-                font-size: 0.9rem;
-                text-align: center;
-                color: var(--text-muted);
-            }
+        .btn-social {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: var(--bg-card);
+            color: var(--text-main);
+            transition: all 0.3s var(--hypr-curve);
+        }
 
-            /* Socials */
-            .social-flex {
-                display: flex;
-                gap: 1.5rem;
-                margin-top: 2rem;
-                justify-content: center;
-            }
+        .btn-social:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
 
-            .btn-social {
-                width: 60px;
-                height: 60px;
-                border-radius: var(--radius-full);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.5rem;
-                background: var(--bg-card);
-                color: var(--text-main);
-                transition: all 0.3s var(--hypr-curve);
-            }
-
-            .btn-social:hover {
-                transform: scale(1.1) rotate(5deg);
-            }
-
-            /* ==========================================================================
+        /* ==========================================================================
            7. HAMBURGER MENU & OVERLAY
            ========================================================================== */
-            .menu-toggle {
-                position: fixed;
-                top: 2rem;
-                right: 2rem;
-                z-index: 100;
-                width: 50px;
-                height: 50px;
-                border-radius: var(--radius-full);
-                background: var(--bg-card);
-                border: 2px solid var(--accent-coral);
-                color: var(--accent-coral);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.5rem;
-                cursor: pointer;
-                transition: all 0.3s var(--hypr-curve);
-            }
+        .menu-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-full);
+            background: var(--bg-card);
+            border: 2px solid var(--accent-coral);
+            color: var(--accent-coral);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s var(--hypr-curve);
+        }
 
-            .menu-toggle:hover {
-                transform: scale(1.1);
-                background: var(--accent-coral);
-                color: var(--bg-base);
-            }
+        .menu-toggle:hover {
+            transform: scale(1.1);
+            background: var(--accent-coral);
+            color: var(--bg-base);
+        }
 
-            .menu-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                background: var(--bg-menu);
-                backdrop-filter: blur(10px);
-                z-index: 90;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.4s ease;
-            }
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-menu);
+            backdrop-filter: blur(10px);
+            z-index: 90;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
 
-            .menu-overlay.active {
-                opacity: 1;
-                pointer-events: auto;
-            }
+        .menu-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
 
-            .menu-links {
-                display: flex;
-                flex-direction: column;
-                gap: 2rem;
-                text-align: center;
-            }
+        .menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            text-align: center;
+        }
 
-            .menu-link {
-                font-size: 2.5rem;
-                font-weight: 700;
-                color: var(--text-main);
-                position: relative;
-                transition: color 0.3s ease;
-                transform: translateY(20px);
-                opacity: 0;
-            }
+        .menu-link {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            position: relative;
+            transition: color 0.3s ease;
+            transform: translateY(20px);
+            opacity: 0;
+        }
 
-            .menu-overlay.active .menu-link {
-                transform: translateY(0);
-                opacity: 1;
-                transition:
-                    transform 0.5s var(--hypr-curve),
-                    opacity 0.5s ease,
-                    color 0.3s ease;
-            }
+        .menu-overlay.active .menu-link {
+            transform: translateY(0);
+            opacity: 1;
+            transition: transform 0.5s var(--hypr-curve), opacity 0.5s ease, color 0.3s ease;
+        }
 
-            .menu-overlay.active .menu-link:nth-child(1) {
-                transition-delay: 0.1s;
-            }
-            .menu-overlay.active .menu-link:nth-child(2) {
-                transition-delay: 0.2s;
-            }
-            .menu-overlay.active .menu-link:nth-child(3) {
-                transition-delay: 0.3s;
-            }
+        .menu-overlay.active .menu-link:nth-child(1) { transition-delay: 0.1s; }
+        .menu-overlay.active .menu-link:nth-child(2) { transition-delay: 0.2s; }
+        .menu-overlay.active .menu-link:nth-child(3) { transition-delay: 0.3s; }
 
-            .menu-link:hover {
-                color: var(--accent-coral);
-            }
+        .menu-link:hover {
+            color: var(--accent-coral);
+        }
 
-            .menu-link::after {
-                content: "";
-                position: absolute;
-                bottom: -5px;
-                left: 0;
-                width: 0%;
-                height: 4px;
-                background: var(--accent-coral);
-                transition: width 0.3s var(--hypr-curve);
-                border-radius: 2px;
-            }
+        .menu-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--accent-coral);
+            transition: width 0.3s var(--hypr-curve);
+            border-radius: 2px;
+        }
 
-            .menu-link:hover::after {
-                width: 100%;
-            }
+        .menu-link:hover::after {
+            width: 100%;
+        }
 
-            /* Responsive */
-            @media (max-width: 768px) {
-                .title {
-                    font-size: 2rem;
-                }
-                .info-grid {
-                    grid-template-columns: 1fr;
-                }
-                .workspace {
-                    padding: 1rem;
-                }
-            }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title { font-size: 2rem; }
+            .info-grid { grid-template-columns: 1fr; }
+            .workspace { padding: 1rem; }
+        }
 
-            /* ==========================================================================
+        /* ==========================================================================
            8. NOTIFICATIONS (HYPRLAND STYLE)
            ========================================================================== */
-            .hypr-notify {
-                position: fixed;
-                top: 2rem;
-                left: 50%;
-                transform: translate(
-                    -50%,
-                    calc(-100% - 5rem)
-                ); /* Fully hidden above screen */
-                background-color: var(--bg-card);
-                color: var(--text-main);
-                padding: 1rem 2rem;
-                border-radius: var(--radius-full);
-                border: var(--border-width) solid var(--accent-coral);
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-                z-index: 1000;
-                font-weight: 700;
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                transition: transform 0.5s var(--hypr-curve);
-                pointer-events: none; /* Prevents blocking clicks when invisible */
-            }
+        .hypr-notify {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translate(-50%, calc(-100% - 5rem)); /* Fully hidden above screen */
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-full);
+            border: var(--border-width) solid var(--accent-coral);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 1000;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.5s var(--hypr-curve);
+            pointer-events: none; /* Prevents blocking clicks when invisible */
+        }
 
-            .hypr-notify.show {
-                transform: translate(-50%, 0); /* Slide down into view */
-            }
-        </style>
-    </head>
-    <body>
-        <!-- Notification System -->
-        <div id="hypr-notification" class="hypr-notify">
-            <i
-                class="fas fa-exclamation-circle"
-                style="color: var(--accent-coral)"
-            ></i>
-            <span id="notify-text">Not Available</span>
+        .hypr-notify.show {
+            transform: translate(-50%, 0); /* Slide down into view */
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Notification System -->
+    <div id="hypr-notification" class="hypr-notify">
+        <i class="fas fa-exclamation-circle" style="color: var(--accent-coral)"></i>
+        <span id="notify-text">Not Available</span>
+    </div>
+
+    <!-- Parallax Background -->
+    <div class="bg-canvas" id="parallax-bg">
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+        <div class="bg-shape shape-3"></div>
+    </div>
+
+    <!-- Hamburger Navigation -->
+    <button class="menu-toggle" id="menu-btn">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <nav class="menu-overlay" id="menu-overlay">
+        <div class="menu-links">
+            <!-- External Links (Easy to modify/add) -->
+            <a href="/tools" class="menu-link">Tools</a>
+            <a href="/blog" class="menu-link">Blog</a>
+            <a href="/contact" class="menu-link">Contact</a>
         </div>
+    </nav>
 
-        <!-- Parallax Background -->
-        <div class="bg-canvas" id="parallax-bg">
-            <div class="bg-shape shape-1"></div>
-            <div class="bg-shape shape-2"></div>
-            <div class="bg-shape shape-3"></div>
-        </div>
+    <!-- Workspace Indicators (Bottom Dots) -->
+    <div class="workspace-indicators" id="indicators">
+        <!-- Dots injected via JS based on number of workspaces -->
+    </div>
 
-        <!-- Hamburger Navigation -->
-        <button class="menu-toggle" id="menu-btn">
-            <i class="fas fa-bars"></i>
-        </button>
+    <!-- MAIN HYPRLAND WORKSPACE ENGINE -->
+    <div class="workspace-container" id="ws-container">
 
-        <nav class="menu-overlay" id="menu-overlay">
-            <div class="menu-links">
-                <!-- External Links (Easy to modify/add) -->
-                <a href="/tools" class="menu-link">Tools</a>
-                <a href="/blog" class="menu-link">Blog</a>
-                <a href="/contact" class="menu-link">Contact</a>
-            </div>
-        </nav>
-
-        <!-- Workspace Indicators (Bottom Dots) -->
-        <div class="workspace-indicators" id="indicators">
-            <!-- Dots injected via JS based on number of workspaces -->
-        </div>
-
-        <!-- MAIN HYPRLAND WORKSPACE ENGINE -->
-        <div class="workspace-container" id="ws-container">
-            <!-- ==========================================
+        <!-- ==========================================
              WORKSPACE 1: HERO / ABOUT ME
              ========================================== -->
-<<<<<<< HEAD
-            <section class="workspace">
-                <div class="container">
-                    <div class="card border-coral intro-card">
-                        <img
-                            src="https://avatars.githubusercontent.com/u/102699155?v=4"
-                            alt="Daniel"
-                            class="profile-pic"
-                        />
-                        <!-- Text to be materialized via JS -->
-                        <h1
-                            class="title"
-                            id="typewriter-text"
-                            data-text="Hi, I'm Daniel."
-                        ></h1>
-                        <p class="subtitle">
-                            ~ an ASU student passionate in exploring the use of
-                            programming to develop innovative, intentful
-                            products.
-                        </p>
-=======
         <section class="workspace">
             <div class="container">
                 <div class="card border-coral intro-card">
@@ -732,356 +661,165 @@
                                 <img src="https://github.com/DanielPiliutsin/danielpiliutsin.github.io/blob/main/Assets/butterfly_on_flower.jpg?raw=true" alt="Butterfly on a Flower" class="gallery-img">
                                 <p class="gallery-desc">Butterfly On Flower.</p>
                             </div>
->>>>>>> 0a1d2bae8d9574caf6d29cd40f0247aaac8de14b
 
-                        <!-- Socials in Hero -->
-                        <div class="social-flex">
-                            <a
-                                href="mailto:Daniel.Piliutsin@gmail.com"
-                                class="btn-social border-coral"
-                                title="Email Me"
-                                ><i class="fas fa-envelope"></i
-                            ></a>
-                            <a
-                                href="https://github.com/DanielPiliutsin"
-                                target="_blank"
-                                class="btn-social border-coral"
-                                ><i class="fab fa-github"></i
-                            ></a>
-                            <a
-                                href="https://www.youtube.com/channel/UCUQa9aBmWw_nH3vDowSKyyg"
-                                target="_blank"
-                                class="btn-social border-coral"
-                                ><i class="fab fa-youtube"></i
-                            ></a>
-                            <a
-                                href="#"
-                                target="_blank"
-                                class="btn-social border-coral"
-                                ><i class="fab fa-instagram"></i
-                            ></a>
                         </div>
                     </div>
+                    <p style="margin-top: 1.5rem; color: var(--text-muted); font-size: 0.85rem;">
+                        <i class="fas fa-mouse-pointer"></i> Hover to pause
+                    </p>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- ==========================================
-             WORKSPACE 2: INFO CARDS
-             ========================================== -->
-            <section class="workspace">
-                <div class="container info-grid">
-                    <!-- Card: Location & Live Clock -->
-                    <div class="card border-yellow info-card">
-                        <!-- Minimalist stylized SVG for Arizona -->
-                        <svg
-                            class="map-icon"
-                            viewBox="0 0 100 100"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M10,10 L70,10 L70,30 L90,30 L90,90 L20,90 L10,80 Z"
-                            />
-                        </svg>
-                        <h3 style="color: var(--accent-yellow)">AZ, USA</h3>
-                        <div class="clock-display" id="az-clock">00:00:00</div>
-                    </div>
+        <!-- NOTE: To add more workspaces, just copy and paste a <section class="workspace"> block here! -->
 
-                    <!-- Card: Language -->
-                    <div class="card border-magenta info-card">
-                        <i
-                            class="fas fa-language info-icon"
-                            style="color: var(--accent-magenta)"
-                        ></i>
-                        <h3
-                            style="
-                                color: var(--accent-magenta);
-                                margin-bottom: 0.5rem;
-                            "
-                        >
-                            Languages
-                        </h3>
-                        <p>- English</p>
-                        <p>- Russian</p>
-                    </div>
+    </div>
 
-                    <!-- Card: Tech Stack / Focus -->
-                    <div class="card border-peach info-card">
-                        <i
-                            class="fas fa-code info-icon"
-                            style="color: var(--accent-peach)"
-                        ></i>
-                        <h3
-                            style="
-                                color: var(--accent-peach);
-                                margin-bottom: 0.5rem;
-                            "
-                        >
-                            Programming
-                        </h3>
-                        <p>- Linux / Hyprland</p>
-                        <p>- Java & Python</p>
-                        <p>- HTML & Javascript</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ==========================================
-             WORKSPACE 3: ENDLESS GALLERY
-             ========================================== -->
-            <section class="workspace">
-                <div class="container">
-                    <div
-                        class="card border-magenta"
-                        style="
-                            width: 100%;
-                            text-align: center;
-                            padding: 3rem 1rem;
-                        "
-                    >
-                        <h2
-                            style="
-                                color: var(--accent-magenta);
-                                margin-bottom: 2rem;
-                                font-size: 2rem;
-                            "
-                        >
-                            Photography & Fun
-                        </h2>
-
-                        <div class="gallery-wrapper">
-                            <!-- ID used by JS to duplicate items for seamless loop -->
-                            <div class="marquee" id="gallery-marquee">
-                                <!-- Placeholder 1 -->
-                                <div class="gallery-item">
-                                    <img
-                                        src="https://github.com/DanielPiliutsin/danielpiliutsin.github.io/blob/main/Assets/duck_1.png?raw=true"
-                                        alt="A duck on grass"
-                                        class="gallery-img"
-                                    />
-                                    <p class="gallery-desc">Quack!</p>
-                                </div>
-
-                                <!-- Placeholder 2 -->
-                                <div class="gallery-item">
-                                    <img
-                                        src="https://github.com/DanielPiliutsin/danielpiliutsin.github.io/blob/main/Assets/beach_night_1.jpg?raw=true"
-                                        alt="Sarasota beach at night"
-                                        class="gallery-img"
-                                    />
-                                    <p class="gallery-desc">My Vibe...</p>
-                                </div>
-
-                                <!-- Placeholder 3 -->
-                                <div class="gallery-item">
-                                    <img
-                                        src="https://github.com/DanielPiliutsin/danielpiliutsin.github.io/blob/main/Assets/florida_mangroves_1.jpg?raw=true"
-                                        alt="Florida Mangroves"
-                                        class="gallery-img"
-                                    />
-                                    <p class="gallery-desc">
-                                        Florida Mangroves.
-                                    </p>
-                                </div>
-
-                                <!-- Placeholder 4 -->
-                                <div class="gallery-item">
-                                    <img
-                                        src="https://github.com/DanielPiliutsin/danielpiliutsin.github.io/blob/main/Assets/swampy_pond_1.jpg?raw=true"
-                                        alt="Florifa Pond with Floating Plants"
-                                        class="gallery-img"
-                                    />
-                                    <p class="gallery-desc">
-                                        Beautiful Florida Pond.
-                                    </p>
-                                </div>
-
-                                <!-- Placeholder 5 -->
-                                <div class="gallery-item">
-                                    <img
-                                        src="https://github.com/DanielPiliutsin/danielpiliutsin.github.io/blob/main/Assets/butterfly_on_flower.jpg?raw=true"
-                                        alt="Butterfly on a Flower"
-                                        class="gallery-img"
-                                    />
-                                    <p class="gallery-desc">
-                                        Butterfly On Flower.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <p
-                            style="
-                                margin-top: 1.5rem;
-                                color: var(--text-muted);
-                                font-size: 0.85rem;
-                            "
-                        >
-                            <i class="fas fa-mouse-pointer"></i> Hover to pause
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- NOTE: To add more workspaces, just copy and paste a <section class="workspace"> block here! -->
-        </div>
-
-        <!-- ==========================================================================
+    <!-- ==========================================================================
          JAVASCRIPT
          ========================================================================== -->
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                /* --- 1. Materialize Text Animation --- */
-                const typeText = document.getElementById("typewriter-text");
-                const textContent = typeText.getAttribute("data-text");
-                typeText.innerHTML = ""; // Clear fallback
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
 
-                // Split into characters and wrap in span
-                textContent.split("").forEach((char, index) => {
-                    const span = document.createElement("span");
-                    // preserve spaces
-                    span.innerHTML = char === " " ? "&nbsp;" : char;
-                    span.className = "char";
-                    // staggered delay
-                    span.style.animationDelay = `${index * 0.1}s`;
-                    typeText.appendChild(span);
-                });
+            /* --- 1. Materialize Text Animation --- */
+            const typeText = document.getElementById('typewriter-text');
+            const textContent = typeText.getAttribute('data-text');
+            typeText.innerHTML = ''; // Clear fallback
+            
+            // Split into characters and wrap in span
+            textContent.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                // preserve spaces
+                span.innerHTML = char === ' ' ? '&nbsp;' : char;
+                span.className = 'char';
+                // staggered delay
+                span.style.animationDelay = `${index * 0.1}s`;
+                typeText.appendChild(span);
+            });
 
-                /* --- 2. Live Arizona Clock --- */
-                function updateClock() {
-                    const clockEl = document.getElementById("az-clock");
-                    // Format time for Arizona (MST/MDT handled automatically by timezone)
-                    const options = {
-                        timeZone: "America/Phoenix",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        second: "2-digit",
-                        hour12: true,
-                    };
-                    const timeString = new Date().toLocaleTimeString(
-                        "en-US",
-                        options,
-                    );
-                    clockEl.innerText = timeString;
+            /* --- 2. Live Arizona Clock --- */
+            function updateClock() {
+                const clockEl = document.getElementById('az-clock');
+                // Format time for Arizona (MST/MDT handled automatically by timezone)
+                const options = { timeZone: 'America/Phoenix', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                const timeString = new Date().toLocaleTimeString('en-US', options);
+                clockEl.innerText = timeString;
+            }
+            setInterval(updateClock, 1000);
+            updateClock(); // initial call
+
+            /* --- 3. Hyprland Workspace Scrolling Engine --- */
+            const wsContainer = document.getElementById('ws-container');
+            const workspaces = document.querySelectorAll('.workspace');
+            const indicatorsContainer = document.getElementById('indicators');
+            
+            let currentWs = 0;
+            let isScrolling = false;
+
+            // Generate dot indicators based on HTML sections
+            workspaces.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = `dot ${i === 0 ? 'active' : ''}`;
+                dot.addEventListener('click', () => goToWorkspace(i));
+                indicatorsContainer.appendChild(dot);
+            });
+            const dots = document.querySelectorAll('.dot');
+
+            function goToWorkspace(index) {
+                if (index < 0 || index >= workspaces.length) return;
+                
+                currentWs = index;
+                // Translate the container horizontally
+                wsContainer.style.transform = `translateX(-${currentWs * 100}vw)`;
+                
+                // Update dots
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[currentWs].classList.add('active');
+                
+                // Block scrolling temporarily to prevent skipping multiple pages at once
+                isScrolling = true;
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 800); // Matches the var(--transition-speed) in CSS
+            }
+
+            // Listen to mouse wheel / trackpad
+            window.addEventListener('wheel', (e) => {
+                if (isScrolling) return; // Debounce
+
+                // Check deltaY for standard scrolling
+                if (e.deltaY > 30) {
+                    goToWorkspace(currentWs + 1); // Scroll down -> go right
+                } else if (e.deltaY < -30) {
+                    goToWorkspace(currentWs - 1); // Scroll up -> go left
                 }
-                setInterval(updateClock, 1000);
-                updateClock(); // initial call
+            }, { passive: true });
 
-                /* --- 3. Hyprland Workspace Scrolling Engine --- */
-                const wsContainer = document.getElementById("ws-container");
-                const workspaces = document.querySelectorAll(".workspace");
-                const indicatorsContainer =
-                    document.getElementById("indicators");
+            /* --- 4. Hamburger Menu Logic --- */
+            const menuBtn = document.getElementById('menu-btn');
+            const menuOverlay = document.getElementById('menu-overlay');
+            const menuIcon = menuBtn.querySelector('i');
 
-                let currentWs = 0;
-                let isScrolling = false;
-
-                // Generate dot indicators based on HTML sections
-                workspaces.forEach((_, i) => {
-                    const dot = document.createElement("div");
-                    dot.className = `dot ${i === 0 ? "active" : ""}`;
-                    dot.addEventListener("click", () => goToWorkspace(i));
-                    indicatorsContainer.appendChild(dot);
-                });
-                const dots = document.querySelectorAll(".dot");
-
-                function goToWorkspace(index) {
-                    if (index < 0 || index >= workspaces.length) return;
-
-                    currentWs = index;
-                    // Translate the container horizontally
-                    wsContainer.style.transform = `translateX(-${currentWs * 100}vw)`;
-
-                    // Update dots
-                    dots.forEach((dot) => dot.classList.remove("active"));
-                    dots[currentWs].classList.add("active");
-
-                    // Block scrolling temporarily to prevent skipping multiple pages at once
-                    isScrolling = true;
-                    setTimeout(() => {
-                        isScrolling = false;
-                    }, 800); // Matches the var(--transition-speed) in CSS
-                }
-
-                // Listen to mouse wheel / trackpad
-                window.addEventListener(
-                    "wheel",
-                    (e) => {
-                        if (isScrolling) return; // Debounce
-
-                        // Check deltaY for standard scrolling
-                        if (e.deltaY > 30) {
-                            goToWorkspace(currentWs + 1); // Scroll down -> go right
-                        } else if (e.deltaY < -30) {
-                            goToWorkspace(currentWs - 1); // Scroll up -> go left
-                        }
-                    },
-                    { passive: true },
-                );
-
-                /* --- 4. Hamburger Menu Logic --- */
-                const menuBtn = document.getElementById("menu-btn");
-                const menuOverlay = document.getElementById("menu-overlay");
-                const menuIcon = menuBtn.querySelector("i");
-
-                menuBtn.addEventListener("click", () => {
-                    menuOverlay.classList.toggle("active");
-                    if (menuOverlay.classList.contains("active")) {
-                        menuIcon.classList.remove("fa-bars");
-                        menuIcon.classList.add("fa-times");
-                    } else {
-                        menuIcon.classList.remove("fa-times");
-                        menuIcon.classList.add("fa-bars");
-                    }
-                });
-
-                /* --- 5. Mouse Parallax Effect --- */
-                const bgContainer = document.getElementById("parallax-bg");
-                const shapes = document.querySelectorAll(".bg-shape");
-
-                document.addEventListener("mousemove", (e) => {
-                    const x = e.clientX / window.innerWidth - 0.5;
-                    const y = e.clientY / window.innerHeight - 0.5;
-
-                    shapes.forEach((shape, index) => {
-                        // Different depths based on index
-                        const depth = (index + 1) * 40;
-                        const moveX = x * depth;
-                        const moveY = y * depth;
-                        shape.style.transform = `translate(${moveX}px, ${moveY}px)`;
-                    });
-                });
-
-                /* --- 6. Seamless Endless Gallery Setup --- */
-                const marquee = document.getElementById("gallery-marquee");
-                // Clone the gallery items once to create a seamless loop
-                const items = marquee.innerHTML;
-                marquee.innerHTML = items + items;
-
-                /* --- 7. URL Hash Notification System --- */
-                const notification =
-                    document.getElementById("hypr-notification");
-                const notifyText = document.getElementById("notify-text");
-
-                function showNotification(message, duration = 5000) {
-                    notifyText.innerText = message;
-                    notification.classList.add("show");
-
-                    // Hide after duration
-                    setTimeout(() => {
-                        notification.classList.remove("show");
-                    }, duration);
-                }
-
-                // Check if URL has a specific hash when the page loads
-                if (window.location.hash === "#error1") {
-                    // Slight delay so it drops in after the page renders
-                    setTimeout(() => {
-                        showNotification("Feature Not Available Yet");
-
-                        // Clean up the URL so refreshing doesn't re-trigger the error
-                        history.replaceState(null, null, " ");
-                    }, 500);
+            menuBtn.addEventListener('click', () => {
+                menuOverlay.classList.toggle('active');
+                if (menuOverlay.classList.contains('active')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
                 }
             });
-        </script>
-    </body>
+
+            /* --- 5. Mouse Parallax Effect --- */
+            const bgContainer = document.getElementById('parallax-bg');
+            const shapes = document.querySelectorAll('.bg-shape');
+            
+            document.addEventListener('mousemove', (e) => {
+                const x = e.clientX / window.innerWidth - 0.5;
+                const y = e.clientY / window.innerHeight - 0.5;
+
+                shapes.forEach((shape, index) => {
+                    // Different depths based on index
+                    const depth = (index + 1) * 40; 
+                    const moveX = x * depth;
+                    const moveY = y * depth;
+                    shape.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                });
+            });
+
+            /* --- 6. Seamless Endless Gallery Setup --- */
+            const marquee = document.getElementById('gallery-marquee');
+            // Clone the gallery items once to create a seamless loop
+            const items = marquee.innerHTML;
+            marquee.innerHTML = items + items;
+
+            /* --- 7. URL Hash Notification System --- */
+            const notification = document.getElementById('hypr-notification');
+            const notifyText = document.getElementById('notify-text');
+
+            function showNotification(message, duration = 5000) {
+                notifyText.innerText = message;
+                notification.classList.add('show');
+                
+                // Hide after duration
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, duration);
+            }
+
+            // Check if URL has a specific hash when the page loads
+            if (window.location.hash === '#error1') {
+                // Slight delay so it drops in after the page renders
+                setTimeout(() => {
+                    showNotification('Feature Not Available Yet');
+                    
+                    // Clean up the URL so refreshing doesn't re-trigger the error
+                    history.replaceState(null, null, ' ');
+                }, 500);
+            }
+
+        });
+    </script>
+</body>
 </html>
